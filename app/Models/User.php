@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @method bool isMahasiswa()
+ * @method bool isDospem()
+ * @method bool isAdmin()
+ * @method bool hasRole(string $role)
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -22,6 +28,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'photo',
+        'google_linked',
+        'google_email',
     ];
 
     /**
@@ -44,6 +53,55 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'google_linked' => 'boolean',
         ];
+    }
+
+    /**
+     * Check if user has a specific role
+     */
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
+    }
+
+    /**
+     * Check if user is mahasiswa
+     */
+    public function isMahasiswa(): bool
+    {
+        return $this->hasRole('mahasiswa');
+    }
+
+    /**
+     * Check if user is dospem
+     */
+    public function isDospem(): bool
+    {
+        return $this->hasRole('dospem');
+    }
+
+    /**
+     * Check if user is admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
+    }
+
+    /**
+     * Get mahasiswa profile if user is mahasiswa
+     */
+    public function mahasiswaProfile()
+    {
+        return $this->hasOne(MahasiswaProfile::class, 'user_id');
+    }
+
+    /**
+     * Get mahasiswa bimbingan if user is dospem
+     */
+    public function mahasiswaBimbingan()
+    {
+        return $this->hasMany(MahasiswaProfile::class, 'dospem_id');
     }
 }

@@ -12,12 +12,26 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    protected static ?string $navigationGroup = 'Kelola Pengguna';
+
+    protected static ?string $navigationLabel = 'Kelola Akun';
+
+    protected static ?int $navigationSort = 1;
+
+    public static function canViewAny(): bool
+    {
+        $user = Auth::user();
+        return $user !== null && $user->isAdmin();
+    }
 
     public static function form(Form $form): Form
     {
@@ -45,7 +59,7 @@ class UserResource extends Resource
                     ->password()
                     ->required(fn (string $context): bool => $context === 'create')
                     ->dehydrated(fn ($state) => filled($state))
-                    ->dehydrateStateUsing(fn ($state) => \Hash::make($state)),
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state)),
                 Forms\Components\Select::make('role')
                     ->options([
                         'mahasiswa' => 'Mahasiswa',

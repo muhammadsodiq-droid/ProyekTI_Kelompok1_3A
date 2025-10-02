@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Khs extends Model
 {
     protected $table = 'khs';
-    public $timestamps = false;
-
+    
     protected $fillable = [
         'mahasiswa_id',
         'file_path',
         'status_validasi',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
     ];
 
     public function mahasiswa()

@@ -24,9 +24,10 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('dashboard')
+            ->path('dashboard')
             ->login(\App\Filament\Auth\Login::class)
+            ->registration(\App\Filament\Auth\Register::class)
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -39,6 +40,12 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+            ])
+            ->navigationGroups([
+                'Kelola Pengguna',
+                'Kelola Akademik',
+                'Kelola PKL',
+                'Pengaturan',
             ])
             ->middleware([
                 EncryptCookies::class,
