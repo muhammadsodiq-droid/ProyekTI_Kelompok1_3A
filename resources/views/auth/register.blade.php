@@ -29,14 +29,14 @@
             <!-- Name -->
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input id="name" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" 
+                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" 
                        class="block w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input id="email" type="email" name="email" :value="old('email')" required autocomplete="username"
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username"
                        class="block w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
 
@@ -54,8 +54,34 @@
                        class="block w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
 
+            <!-- NIM -->
+            <div class="mt-4">
+                <label for="nim" class="block text-sm font-medium text-gray-700">NIM</label>
+                <input id="nim" type="text" name="nim" value="{{ old('nim') }}" required
+                       class="block w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <!-- Prodi -->
+            <div class="mt-4">
+                <label for="prodi" class="block text-sm font-medium text-gray-700">Prodi</label>
+                <select id="prodi" name="prodi" class="block w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value="Teknologi Informasi">Teknologi Informasi</option>
+                    <option value="D4 Teknologi Rekayasa Komputer Jaringan">D4 Teknologi Rekayasa Komputer Jaringan</option>
+                    <option value="D3 Teknologi Otomotif">D3 Teknologi Otomotif</option>
+                    <option value="D4 Teknologi Rekayasa Konstruksi Jalan dan Jembatan">D4 Teknologi Rekayasa Konstruksi Jalan dan Jembatan</option>
+                    <option value="D3 Teknologi Informasi">D3 Teknologi Informasi</option>
+                </select>
+            </div>
+
+            <!-- Semester -->
+            <div class="mt-4">
+                <label for="semester" class="block text-sm font-medium text-gray-700">Semester</label>
+                <input id="semester" type="number" name="semester" value="5" required
+                       class="block w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
             <div class="flex items-center justify-end mt-4">
-                <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('login') }}">
+                <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('filament.admin.auth.login') }}">
                     Already registered?
                 </a>
 
