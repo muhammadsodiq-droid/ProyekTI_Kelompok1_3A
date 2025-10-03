@@ -81,7 +81,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('filament.admin.auth.login') }}">
+                <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('login') }}">
                     Already registered?
                 </a>
 

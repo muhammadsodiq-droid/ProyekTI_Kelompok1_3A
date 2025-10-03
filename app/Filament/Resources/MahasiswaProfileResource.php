@@ -12,12 +12,25 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class MahasiswaProfileResource extends Resource
 {
     protected static ?string $model = MahasiswaProfile::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-identification';
+
+    protected static ?string $navigationGroup = 'Kelola Pengguna';
+
+    protected static ?string $navigationLabel = 'Profile Mahasiswa';
+
+    protected static ?int $navigationSort = 2;
+
+    public static function canViewAny(): bool
+    {
+        $user = Auth::user();
+        return $user !== null && ($user->isAdmin() || $user->isDospem());
+    }
 
     public static function form(Form $form): Form
     {
