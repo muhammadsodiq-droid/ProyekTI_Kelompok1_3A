@@ -44,13 +44,13 @@
 <div class="card">
   <h3 class="section-title">Pemberkasan PKL</h3>
 
-  @if ($okCount === 3)
-    <div class="alert alert-success">Selamat, berkasmu telah selesai dan tervalidasi dengan sempurna!</div>
-  @else
-    <div class="alert">Silakan lengkapi berkas PKL-mu. Pastikan setiap dokumen berstatus <em>tervalidasi</em>.</div>
-  @endif
+{{ $okCount ?? 0 }}
 
-  <p class="text-sm">Progress: <strong>({{ $okCount }}/3)</strong></p>
+  
+    <div class="alert alert-success">Selamat, berkasmu telah selesai dan tervalidasi dengan sempurna!</div>
+    <div class="alert">Silakan lengkapi berkas PKL-mu. Pastikan setiap dokumen berstatus <em>tervalidasi</em>.</div>
+
+  <p class="text-sm">Progress: <strong>({{$okCount ?? 0}} )</strong></p>
 
   <div class="progress-steps">
     <span class="{{ $kCls }}" title="KHS"></span>
@@ -64,12 +64,12 @@
 <div class="card step">
   <h3 class="section-title">Step 1: Unggah KHS</h3>
 
-  @if (!$biodataLengkap)
+  (!$biodataLengkap)
     <p class="text-sm">
       <x-status-badge label="Biodata belum lengkap (IPK wajib diisi)" kind="bad"/>
     </p>
     <a class="btn" href="{{ route('profile.show') }}">Lengkapi Biodata</a>
-  @else
+  
     @php [$label,$kind] = $badge($khs['status_validasi'] ?? null); @endphp
     <p class="text-sm">
       Status: <x-status-badge :label="$label" :kind="$kind"/>
@@ -90,7 +90,6 @@
         <button class="btn secondary" data-action="delete_khs">🗑️ Hapus</button>
       @endif
     </div>
-  @endif
 </div>
 
 {{-- Step 2 --}}
